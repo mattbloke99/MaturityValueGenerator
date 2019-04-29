@@ -21,7 +21,28 @@ namespace MaturityValueGenerator
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    policies.Add(new Policy(line));
+
+                    var policyType = line.Substring(0, 1);
+
+
+
+                    switch (policyType)
+                    {
+                        case "A":
+                            policies.Add(new PolicyA(line));
+                            break;
+                        case "B":
+                            policies.Add(new PolicyB(line));
+                            break;
+                        case "C":
+                            policies.Add(new PolicyC(line));
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                    
                 }
 
                 Policies = policies;

@@ -2,7 +2,7 @@
 
 namespace MaturityValueGenerator
 {
-    public class Policy
+    public abstract class Policy
     {
         public Policy(string csvString)
         {
@@ -23,41 +23,23 @@ namespace MaturityValueGenerator
             UpliftPercentage = decimal.Parse(items[5]);
         }
 
-        public string PolicyNumber { get;  set; }
-        public DateTime PolicyStartDate { get;  set; }
-        public decimal Premiums { get;  set; }
-        public bool HasMembershipRights { get;  set; }
-        public decimal DiscretionaryBonus { get;  set; }
-        public decimal UpliftPercentage { get;  set; }
+        public string PolicyNumber { get; set; }
+        public DateTime PolicyStartDate { get; set; }
+        public decimal Premiums { get; set; }
+        public bool HasMembershipRights { get; set; }
+        public decimal DiscretionaryBonus { get; set; }
+        public decimal UpliftPercentage { get; set; }
+        public decimal ManagementFeePercentage { get; set; }
+
+        public virtual bool QualifiesForDiscretionaryBonus { get; set; }
 
         public decimal CalculateMaturityValue()
         {
             //maturity value = premiums – management fee) + discretionary bonus if qualifying) *uplift
-            var managementFees = Premiums * CalculateManagementFeePercentage() / 100;
+            var managementFees = Premiums * ManagementFeePercentage / 100;
+            var actualBonus = QualifiesForDiscretionaryBonus ? DiscretionaryBonus : 0;
 
-            return (Premiums - managementFees + DiscretionaryBonus) * (UpliftPercentage + 100) / 100;
-        }
-
-        public decimal CalculateManagementFeePercentage()
-        {
-            if (PolicyStartDate < new DateTime(1990, 1, 1))
-            {
-                return 3;
-            }
-
-            if (HasMembershipRights)
-            {
-                return 5;
-            }
-            else
-            {
-                if (PolicyStartDate >= new DateTime(1990, 1, 1))
-                {
-                    return 7;
-                }
-            }
-
-            throw new ApplicationException("Unrecognised policy type");
+            return (Premiums - managementFees + actualBonus) * (UpliftPercentage + 100) / 100;
         }
     }
 }
