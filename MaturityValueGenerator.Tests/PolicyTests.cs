@@ -20,7 +20,7 @@ namespace Tests
         }
 
         [Test]
-        public void CreatePolicyTooManyItemsTest()
+        public void CreatePolicyWrongNumberOfItemsTest()
         {
             Assert.Throws<ApplicationException>(() => new Policy("A100001,01/06/1986,10000,Y,1000,40,EXTRAITEM"));
         }

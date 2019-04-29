@@ -8,7 +8,7 @@ namespace MaturityValueGenerator.Tests
     public class PolicyLoaderServiceTests
     {
         [Test]
-        public void SaveXmlTest()
+        public void CreateXmlTest()
         {
             IEnumerable<Policy> policies = new List<Policy>()
             {
@@ -17,16 +17,12 @@ namespace MaturityValueGenerator.Tests
                 new Policy("C100001,01/01/1992,13000,N,1000,42")
             };
 
-            MaturityCalculatorService maturityCalculator = new MaturityCalculatorService(policies);
+            MaturityXmlService maturityXmlService = new MaturityXmlService(policies);
 
-            maturityCalculator.ExportToXml("myFile.xml");
-
-            XElement xdoc = XElement.Load("myFile.xml");
+            XDocument xdoc = maturityXmlService.CreateXml();
 
             Assert.AreEqual(3, xdoc.Descendants("Policy").Count());
-
             Assert.IsNotEmpty(xdoc.Descendants("Policy").First().ToString());
-
             Assert.AreEqual("A100001", xdoc.Descendants("Policy").First().Element("Number").Value);
         }
     }

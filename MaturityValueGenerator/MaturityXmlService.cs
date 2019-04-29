@@ -3,16 +3,16 @@ using System.Xml.Linq;
 
 namespace MaturityValueGenerator
 {
-    public class MaturityCalculatorService
+    public class MaturityXmlService
     {
         private IEnumerable<Policy> policies;
 
-        public MaturityCalculatorService(IEnumerable<Policy> policies)
+        public MaturityXmlService(IEnumerable<Policy> policies)
         {
             this.policies = policies;
         }
 
-        public void ExportToXml(string filename)
+        public XDocument CreateXml()
         {
             XElement xmlPolicies = new XElement("Policies");
 
@@ -21,11 +21,9 @@ namespace MaturityValueGenerator
                 xmlPolicies.Add(CreatePolicyElement(policy));
             }
 
-            XDocument doc = new XDocument(xmlPolicies);
-
-            doc.Save(filename);
+            return new XDocument(xmlPolicies);
         }
-
+   
         private XElement CreatePolicyElement(Policy policy)
         {
             XElement xmlPolicy = new XElement("Policy");

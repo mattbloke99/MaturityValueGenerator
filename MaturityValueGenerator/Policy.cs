@@ -13,7 +13,8 @@ namespace MaturityValueGenerator
                 throw new ApplicationException($"Wrong number of items found in CSV. CSV was {csvString}");
             }
 
-            //to make this more robust TryParse could be used and errors throw if problems are encountered.
+            //to make this more robust TryParse could be used and errors thrown if problems are encountered.
+            //it would also be worthwhile validating the policy number length and format
             PolicyNumber = items[0];
             PolicyStartDate = DateTime.Parse(items[1]);
             Premiums = decimal.Parse(items[2]);

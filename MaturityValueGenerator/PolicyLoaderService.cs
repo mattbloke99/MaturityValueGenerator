@@ -1,13 +1,10 @@
-﻿using MaturityValueGenerator;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace MaturityValueGenerator
 {
     public class PolicyLoaderService
     {
-        private string v;
-
         public PolicyLoaderService(string filePath)
         {
 
@@ -17,8 +14,6 @@ namespace MaturityValueGenerator
             }
 
             IList<Policy> policies = new List<Policy>();
-
-
 
             using (StreamReader sr = new StreamReader(filePath))
             {
