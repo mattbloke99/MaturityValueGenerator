@@ -6,7 +6,7 @@
   </Policy>
   <Policy>
     <Number>A100002</Number>
-    <MaturityValue>17840.625</MaturityValue>
+    <MaturityValue>16671.875</MaturityValue>
   </Policy>
   <Policy>
     <Number>A100003</Number>
@@ -18,22 +18,22 @@
   </Policy>
   <Policy>
     <Number>B100002</Number>
-    <MaturityValue>29257.8</MaturityValue>
+    <MaturityValue>24453</MaturityValue>
   </Policy>
   <Policy>
     <Number>B100003</Number>
-    <MaturityValue>33930</MaturityValue>
+    <MaturityValue>33350</MaturityValue>
   </Policy>
   <Policy>
     <Number>C100001</Number>
-    <MaturityValue>18587.8</MaturityValue>
+    <MaturityValue>17167.8</MaturityValue>
   </Policy>
   <Policy>
     <Number>C100002</Number>
-    <MaturityValue>23832</MaturityValue>
+    <MaturityValue>20088</MaturityValue>
   </Policy>
   <Policy>
     <Number>C100003</Number>
-    <MaturityValue>27959</MaturityValue>
+    <MaturityValue>27462.6</MaturityValue>
   </Policy>
 </Policies>
