@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace MaturityValueGenerator.Tests
 {
-    public class PolicyLoaderServiceTests
+    public class MaturityXmlServiceTests
     {
         [Test]
         public void CreateXmlTest()

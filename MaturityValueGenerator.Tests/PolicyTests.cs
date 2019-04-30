@@ -2,7 +2,7 @@ using System;
 using MaturityValueGenerator;
 using NUnit.Framework;
 
-namespace Tests
+namespace MaturityValueGenerator.Tests
 {
     public class PolicyTests
     {
@@ -17,7 +17,7 @@ namespace Tests
             Assert.AreEqual(true, policy.HasMembershipRights);
             Assert.AreEqual(1000, policy.DiscretionaryBonus);
             Assert.AreEqual(40, policy.UpliftPercentage);
-            
+
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Tests
         public void CalculateManagementFeePolicyTypeATest()
         {
             Policy policy = new PolicyA("A100001,01/06/1986,10000,Y,1000,40");
-            
+
             Assert.AreEqual(3, policy.ManagementFeePercentage);
             Assert.IsTrue(policy.QualifiesForDiscretionaryBonus);
         }
@@ -66,13 +66,13 @@ namespace Tests
 
             policy = new PolicyB("B100001,01/01/1995,12000,Y,2000,41");
 
-            expected = (policy.Premiums - (policy.Premiums * policy.ManagementFeePercentage /100) + policy.DiscretionaryBonus) * ((100 + policy.UpliftPercentage)/100);
+            expected = (policy.Premiums - policy.Premiums * policy.ManagementFeePercentage / 100 + policy.DiscretionaryBonus) * ((100 + policy.UpliftPercentage) / 100);
 
             Assert.AreEqual(expected, policy.CalculateMaturityValue());
 
             policy = new PolicyC("C100001,01/01/1992,13000,N,1000,42");
 
-            expected = (policy.Premiums - (policy.Premiums * policy.ManagementFeePercentage / 100)) * ((100 + policy.UpliftPercentage) / 100);
+            expected = (policy.Premiums - policy.Premiums * policy.ManagementFeePercentage / 100) * ((100 + policy.UpliftPercentage) / 100);
 
             Assert.AreEqual(expected, policy.CalculateMaturityValue());
         }
