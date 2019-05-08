@@ -13,7 +13,7 @@ namespace MaturityValueGenerator.Tests
         {
             PolicyLoaderService loaderService = new PolicyLoaderService(@"C:\Users\Matt\source\repos\MaturityValueGenerator\MaturityData.csv");
 
-            Assert.IsInstanceOf<IEnumerable<Policy>>(loaderService.Policies);
+            Assert.IsInstanceOf<IEnumerable<IPolicy>>(loaderService.Policies);
             Assert.AreEqual(9, loaderService.Policies.Count());
         }
 

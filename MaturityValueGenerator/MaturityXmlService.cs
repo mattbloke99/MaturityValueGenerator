@@ -5,9 +5,9 @@ namespace MaturityValueGenerator
 {
     public class MaturityXmlService
     {
-        private IEnumerable<Policy> policies;
+        private IEnumerable<IPolicy> policies;
 
-        public MaturityXmlService(IEnumerable<Policy> policies)
+        public MaturityXmlService(IEnumerable<IPolicy> policies)
         {
             this.policies = policies;
         }
@@ -24,7 +24,7 @@ namespace MaturityValueGenerator
             return new XDocument(xmlPolicies);
         }
    
-        private XElement CreatePolicyElement(Policy policy)
+        private XElement CreatePolicyElement(IPolicy policy)
         {
             XElement xmlPolicy = new XElement("Policy");
             xmlPolicy.Add(new XElement("Number", policy.PolicyNumber));

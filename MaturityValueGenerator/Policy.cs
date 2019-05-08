@@ -2,9 +2,9 @@
 
 namespace MaturityValueGenerator
 {
-    public abstract class Policy
+    public abstract class Policy : IPolicy
     {
-        public Policy(string csvString)
+        public Policy LoadLine(string csvString)
         {
             var items = csvString.Split(",");
 
@@ -21,6 +21,8 @@ namespace MaturityValueGenerator
             HasMembershipRights = items[3].Equals("Y", StringComparison.InvariantCultureIgnoreCase);
             DiscretionaryBonus = decimal.Parse(items[4]);
             UpliftPercentage = decimal.Parse(items[5]);
+
+            return this;
         }
 
         public string PolicyNumber { get; set; }
@@ -40,6 +42,11 @@ namespace MaturityValueGenerator
             var actualBonus = QualifiesForDiscretionaryBonus ? DiscretionaryBonus : 0;
 
             return (Premiums - managementFees + actualBonus) * (UpliftPercentage + 100) / 100;
+        }
+
+        void IPolicy.LoadLine(string csvString)
+        {
+            throw new NotImplementedException();
         }
     }
 }

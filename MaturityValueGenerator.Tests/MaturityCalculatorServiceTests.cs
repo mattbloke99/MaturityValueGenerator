@@ -10,11 +10,11 @@ namespace MaturityValueGenerator.Tests
         [Test]
         public void CreateXmlTest()
         {
-            IEnumerable<Policy> policies = new List<Policy>()
+            IEnumerable<IPolicy> policies = new List<Policy>
             {
-                new PolicyA("A100001,01/06/1986,10000,Y,1000,40"),
-                new PolicyB("B100001,01/01/1995,12000,Y,2000,41"),
-                new PolicyC("C100001,01/01/1992,13000,N,1000,42")
+                new PolicyA().LoadLine("A100001,01/06/1986,10000,Y,1000,40"),
+                new PolicyB().LoadLine("B100001,01/01/1995,12000,Y,2000,41"),
+                new PolicyC().LoadLine("C100001,01/01/1992,13000,N,1000,42")
             };
 
             MaturityXmlService maturityXmlService = new MaturityXmlService(policies);

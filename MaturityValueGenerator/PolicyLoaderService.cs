@@ -13,10 +13,12 @@ namespace MaturityValueGenerator
                 throw new FileNotFoundException($"Could not load {filePath}");
             }
 
-            IList<Policy> policies = new List<Policy>();
+            IList<IPolicy> policies = new List<IPolicy>();
 
             using (StreamReader sr = new StreamReader(filePath))
             {
+                PolicyFactory policyFactory = new PolicyFactory();
+
                 string headerLine = sr.ReadLine();
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -24,31 +26,16 @@ namespace MaturityValueGenerator
 
                     var policyType = line.Substring(0, 1);
 
+                    IPolicy policy = policyFactory.CreatePolicy(policyType, line);
 
+                    policies.Add(policy);
 
-                    switch (policyType)
-                    {
-                        case "A":
-                            policies.Add(new PolicyA(line));
-                            break;
-                        case "B":
-                            policies.Add(new PolicyB(line));
-                            break;
-                        case "C":
-                            policies.Add(new PolicyC(line));
-                            break;
-                        default:
-                            break;
-                    }
-
-
-                    
                 }
 
                 Policies = policies;
             }
         }
 
-        public IEnumerable<Policy> Policies { get; set; }
+        public IEnumerable<IPolicy> Policies { get; set; }
     }
 }
